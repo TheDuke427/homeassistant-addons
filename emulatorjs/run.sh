@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 cd /emulatorjs
 
-# Start EmulatorJS using npm start
-npm start
+# Start http-server on all interfaces
+npx http-server -p 8080 -a 0.0.0.0
