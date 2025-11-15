@@ -35,4 +35,4 @@ echo "]" >> "$OUTPUT_FILE"
 echo "roms.json generated at $OUTPUT_FILE"
 
 # Start HTTP server
-npx http-server ./dist/www -p 8080 -a 0.0.0.0
+npx http-server ./dist -p 8080 -a 0.0.0.0
