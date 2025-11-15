@@ -11,26 +11,23 @@ RUN apt-get update && apt-get install -y \
     p7zip-full \
  && rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /emulatorjs
 
 # Clone EmulatorJS repo
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
 
-# Install dependencies
+# Install npm packages
 RUN npm install
 
-# Patch build.js to avoid TTY errors
-RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js \
- && sed -i 's/process.stdout.cursorTo(0);/if(process.stdout.isTTY) process.stdout.cursorTo(0);/' build.js
+# Patch build.js to avoid TTY error
+RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js
 
-# Build EmulatorJS (creates dist/)
+# Build EmulatorJS
 RUN npm run build
 
-# Copy run script
-COPY run.sh /emulatorjs/run.sh
-RUN chmod +x /emulatorjs/run.sh
-
-# Expose port
+# Expose default port if needed
 EXPOSE 8080
 
-CMD ["/emulatorjs/run.sh"]
+# Start EmulatorJS server (adjust if needed)
+CMD ["./run.sh"]
