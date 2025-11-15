@@ -3,14 +3,18 @@ set -e
 
 cd /emulatorjs
 
-echo "Skipping rebuild — using prebuilt dist/www"
+echo "Skipping rebuild — using prebuilt dist/"
 
-# Generate roms.json dynamically from /roms
+# Generate roms.json in dist/www so the UI can fetch it
 ROM_DIR="/roms"
-OUTPUT_FILE="/emulatorjs/dist/www/roms.json"  # <- inside www
+OUTPUT_FILE="./dist/www/roms.json"
 
+echo "Generating roms.json from $ROM_DIR ..."
+
+# Start JSON array
 echo "[" > "$OUTPUT_FILE"
 
+# Loop through systems (SNES, NES, etc.)
 for SYSTEM in "$ROM_DIR"/*; do
   if [ -d "$SYSTEM" ]; then
     SYSTEM_NAME=$(basename "$SYSTEM")
@@ -22,11 +26,13 @@ for SYSTEM in "$ROM_DIR"/*; do
   fi
 done
 
+# Remove trailing comma
 sed -i '$ s/,$//' "$OUTPUT_FILE"
 echo "]" >> "$OUTPUT_FILE"
 
-echo "roms.json generated at $OUTPUT_FILE (size: $(stat -c%s "$OUTPUT_FILE") bytes)"
+echo "roms.json generated at $OUTPUT_FILE"
+echo "Preview:"
+cat "$OUTPUT_FILE"
 
-# Start HTTP server serving the full UI
-echo "Starting http-server on ./dist/www"
+# Start HTTP server to serve dist/www
 npx http-server ./dist/www -p 8080 -a 0.0.0.0
