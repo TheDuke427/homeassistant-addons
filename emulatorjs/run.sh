@@ -3,21 +3,17 @@ set -e
 
 cd /emulatorjs
 
-echo "Starting EmulatorJS container..."
+echo "Using prebuilt dist/ — skipping rebuild"
 
-# --- Generate roms.json dynamically ---
+# === Generate roms.json dynamically ===
 ROM_DIR="/roms"
-DATA_DIR="/emulatorjs/data"
-OUTPUT_FILE="$DATA_DIR/roms.json"
-
-mkdir -p "$DATA_DIR"
+OUTPUT_FILE="/emulatorjs/data/roms.json"  # writable folder
 
 echo "Generating roms.json from $ROM_DIR ..."
 
 # Start JSON array
 echo "[" > "$OUTPUT_FILE"
 
-# Loop through system folders
 for SYSTEM in "$ROM_DIR"/*; do
   if [ -d "$SYSTEM" ]; then
     SYSTEM_NAME=$(basename "$SYSTEM")
@@ -29,19 +25,11 @@ for SYSTEM in "$ROM_DIR"/*; do
   fi
 done
 
-# Remove trailing comma
+# Remove trailing comma and close array
 sed -i '$ s/,$//' "$OUTPUT_FILE"
 echo "]" >> "$OUTPUT_FILE"
 
-echo "roms.json generated at $OUTPUT_FILE (size: $(stat -c%s "$OUTPUT_FILE") bytes)"
+echo "roms.json generated at $OUTPUT_FILE"
 
-# --- Prepare UI ---
-# Copy all top-level dist files (docs, css, js) into www for serving
-cp -r dist/docs dist/www/
-cp dist/emulator.css dist/www/
-cp dist/loader.js dist/www/
-cp dist/version.json dist/www/
-
-# Serve complete UI
-echo "Starting HTTP server, serving ./dist/www ..."
+# === Start HTTP server serving original dist/www ===
 npx http-server ./dist/www -p 8080 -a 0.0.0.0
