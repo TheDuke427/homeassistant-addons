@@ -12,5 +12,8 @@
   },
   "map": [
     "/media/JELLYFINMEDIA/Roms:ro:/roms"
-  ]
+  ],
+  "roms_path": "/roms",
+  "save_path": "/emulatorjs/saves",
+  "cores_path": "/emulatorjs/cores"
 }
