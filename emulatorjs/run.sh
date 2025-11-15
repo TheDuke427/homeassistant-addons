@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 cd /emulatorjs
 
-# Make sure EmulatorJS is built
+# Build EmulatorJS
 npm install
 npm run build
 
-# Extract archive to dist
-7z x 4.2.3.7z -o./dist
+# Extract the ZIP archive to ./dist/www
+unzip -o dist/4.2.3.zip -d dist/www
 
-# Start http-server to serve the UI
-npx http-server ./dist -p 8080 -a 0.0.0.0
+# Serve the extracted folder
+npx http-server dist/www -p 8080 -a 0.0.0.0
