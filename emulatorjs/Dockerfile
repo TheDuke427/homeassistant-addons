@@ -1,21 +1,15 @@
 FROM node:18-alpine
 
 # Install dependencies
-RUN apk add --no-cache \
-    bash \
-    git \
-    python3 \
-    make \
-    g++ \
-    p7zip
+RUN apk add --no-cache bash git python3 make g++ p7zip
 
 WORKDIR /emulatorjs
 
-# Clone repo and install dependencies
+# Clone repo and install npm dependencies
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git . \
     && npm install
 
-# Expose port
+# Expose default EmulatorJS port
 EXPOSE 8080
 
 # Copy run script
