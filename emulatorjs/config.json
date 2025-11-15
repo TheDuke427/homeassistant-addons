@@ -1,36 +1,13 @@
 {
-  "arch": [
-    "amd64",
-    "armv7"
-  ],
-  "boot": "auto",
-  "description": "Retroarch Web",
-  "environment": {
-    "TZ": "America/New_York"
-  },
-  "map": [
-    "share:rw",
-    "ssl:ro"
-  ],
-  "name": "emulatorjs",
-  "options": {},
-  "init": false,
-  "ports": {
-    "80/tcp": "89",
-    "3000/tcp": "3000"
-  },
-  "ports_description": {
-    "80/tcp": "Web interface",
-    "3000/tcp": "Admin interface"
-  },
-  "schema": {},
-  "slug": "emulatorjs",
-  "startup": "services",
-  "upstream": "1.0",
-  "url": "https://github.com/TheDuke427/homeassistant-addons",
+  "name": "EmulatorJS (Source Build)",
   "version": "1.0.0",
-  "panel_admin": false,
-  "ingress": true,
-  "ingress_port": 80,
-  "webui": "[PROTO:ssl]://[HOST]:[PORT:80]"
+  "slug": "emulatorjs",
+  "description": "Builds EmulatorJS directly from GitHub source.",
+  "arch": ["amd64", "aarch64"],
+  "startup": "services",
+  "boot": "auto",
+  "webui": "http://[HOST]:[PORT:80]",
+  "ports": {
+    "80/tcp": 80
+  }
 }
