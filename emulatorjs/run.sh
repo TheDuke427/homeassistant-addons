@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Run EmulatorJS in HA container
 
-# Go to the EmulatorJS folder
+# Navigate to emulatorjs directory
 cd /emulatorjs
 
-# Start the server directly
-node server/server.js --host 0.0.0.0 --port 80
+# Start the server
+# Adjust port if needed
+node server.js
