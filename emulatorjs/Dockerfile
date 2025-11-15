@@ -23,6 +23,9 @@ RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdou
 # Build EmulatorJS (creates dist/)
 RUN npm run build
 
+# Create www directory explicitly BEFORE copying UI
+RUN mkdir -p /emulatorjs/dist/www
+
 # NOW copy your UI
 COPY index.html /emulatorjs/dist/www/index.html
 
