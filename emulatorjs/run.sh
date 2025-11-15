@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Build EmulatorJS public assets
-emulatorjs build
+# Go to the EmulatorJS folder
+cd /emulatorjs
 
-# Start emulatorjs server
-emulatorjs server --host 0.0.0.0 --port 80
+# Start the server directly
+node server/server.js --host 0.0.0.0 --port 80
