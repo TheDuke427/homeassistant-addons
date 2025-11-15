@@ -11,8 +11,6 @@
     "8080/tcp": 8080
   },
   "map": [
-  "/media/JELLYFINMEDIA/Roms:ro:/roms",
-  "/media/JELLYFINMEDIA/EmulatorJS/saves:rw:/emulatorjs/saves",
-  "/media/JELLYFINMEDIA/EmulatorJS/cores:ro:/emulatorjs/cores"
+  "/media/JELLYFINMEDIA/EmulatorJS:/emulatorjs"
 ]
 }
