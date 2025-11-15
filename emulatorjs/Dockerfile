@@ -17,22 +17,23 @@ WORKDIR /emulatorjs
 # Clone EmulatorJS repo
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
 
-# Copy generate_roms.cjs into container
+# Copy custom script to generate roms.json
 COPY generate_roms.cjs /emulatorjs/generate_roms.cjs
 
 # Install npm packages
 RUN npm install
 
 # Patch build.js to avoid TTY errors
-RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js \
- && sed -i 's/process.stdout.cursorTo(0);/if(process.stdout.isTTY) process.stdout.cursorTo(0);/' build.js
+RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js
 
-# Make run.sh executable
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+# Build EmulatorJS
+RUN npm run build
 
-# Expose default port
+# Generate roms.json
+RUN node generate_roms.cjs
+
+# Expose port
 EXPOSE 8080
 
-# Start container with run.sh
-CMD ["/run.sh"]
+# Start HTTP server
+CMD ["npx", "http-server", "/emulatorjs/dist", "-p", "8080", "-a", "0.0.0.0"]
