@@ -1,5 +1,5 @@
 {
-  "name": "EmulatorJS (Source Build)",
+  "name": "EmulatorJS",
   "version": "1.0.0",
   "slug": "emulatorjs",
   "description": "Builds EmulatorJS directly from GitHub source.",
