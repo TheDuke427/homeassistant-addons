@@ -1,4 +1,3 @@
-# Use Node 18 LTS on Alpine
 FROM node:18-alpine
 
 # Install dependencies
@@ -10,18 +9,16 @@ RUN apk add --no-cache \
     g++ \
     p7zip
 
-# Set working directory
 WORKDIR /emulatorjs
 
-# Clone EmulatorJS repo and build
+# Clone repo and install dependencies
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git . \
-    && npm install \
-    && npm run build
+    && npm install
 
-# Expose port for HA add-on
+# Expose port
 EXPOSE 8080
 
-# Copy startup script
+# Copy run script
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
