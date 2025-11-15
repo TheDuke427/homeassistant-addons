@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 set -e
 
-echo "=== STARTUP: container $(date) ==="
 cd /emulatorjs
 
-echo "Skipping rebuild — using prebuilt dist/www"
+echo "Starting EmulatorJS container..."
 
-# === Generate roms.json dynamically ===
-ROM_DIR="/roms"                # mapped folder from HA config
-OUTPUT_FILE="/emulatorjs/dist/www/roms.json"  # EmulatorJS expects it here
+# --- Generate roms.json dynamically ---
+ROM_DIR="/roms"
+DATA_DIR="/emulatorjs/data"
+OUTPUT_FILE="$DATA_DIR/roms.json"
+
+mkdir -p "$DATA_DIR"
 
 echo "Generating roms.json from $ROM_DIR ..."
 
-# Make sure the file exists
-mkdir -p "$(dirname "$OUTPUT_FILE")"
+# Start JSON array
 echo "[" > "$OUTPUT_FILE"
 
-# Loop through system folders (SNES, NES, etc.)
+# Loop through system folders
 for SYSTEM in "$ROM_DIR"/*; do
   if [ -d "$SYSTEM" ]; then
     SYSTEM_NAME=$(basename "$SYSTEM")
@@ -28,12 +29,19 @@ for SYSTEM in "$ROM_DIR"/*; do
   fi
 done
 
-# Remove trailing comma and close JSON array
+# Remove trailing comma
 sed -i '$ s/,$//' "$OUTPUT_FILE"
 echo "]" >> "$OUTPUT_FILE"
 
 echo "roms.json generated at $OUTPUT_FILE (size: $(stat -c%s "$OUTPUT_FILE") bytes)"
 
-# === Start HTTP server ===
-echo "Starting http-server serving ./dist/www on :8080"
-npx http-server ./dist -p 8080 -a 0.0.0.0
+# --- Prepare UI ---
+# Copy all top-level dist files (docs, css, js) into www for serving
+cp -r dist/docs dist/www/
+cp dist/emulator.css dist/www/
+cp dist/loader.js dist/www/
+cp dist/version.json dist/www/
+
+# Serve complete UI
+echo "Starting HTTP server, serving ./dist/www ..."
+npx http-server ./dist/www -p 8080 -a 0.0.0.0
