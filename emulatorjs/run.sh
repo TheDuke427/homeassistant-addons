@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 cd /emulatorjs
 
-# Make sure EmulatorJS is built
+# Build EmulatorJS
 npm install
 npm run build
 
-# Start http-server serving the entire /emulatorjs directory
-# This includes /dist and /roms
+# Generate roms.json
 node generate_roms.js
-npx http-server /emulatorjs -p 8080 -a 0.0.0.0
+
+# Start http-server to serve the UI
+npx http-server /emulatorjs/dist -p 8080 -a 0.0.0.0
