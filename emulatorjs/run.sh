@@ -7,14 +7,10 @@ echo "Skipping rebuild — using prebuilt dist/www"
 
 # Generate roms.json dynamically from /roms
 ROM_DIR="/roms"
-OUTPUT_FILE="/emulatorjs/dist/www/roms.json"  # must be in web root for UI
+OUTPUT_FILE="/emulatorjs/dist/www/roms.json"  # <- inside www
 
-echo "Generating roms.json from $ROM_DIR ..."
-
-# Start JSON array
 echo "[" > "$OUTPUT_FILE"
 
-# Loop through systems like SNES, NES
 for SYSTEM in "$ROM_DIR"/*; do
   if [ -d "$SYSTEM" ]; then
     SYSTEM_NAME=$(basename "$SYSTEM")
@@ -26,7 +22,6 @@ for SYSTEM in "$ROM_DIR"/*; do
   fi
 done
 
-# Remove trailing comma
 sed -i '$ s/,$//' "$OUTPUT_FILE"
 echo "]" >> "$OUTPUT_FILE"
 
