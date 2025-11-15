@@ -2,4 +2,4 @@
 cd /emulatorjs
 
 # Start http-server on all interfaces
-npx http-server -p 8080 -a 0.0.0.0
+npx http-server /roms -p 8080 -a 0.0.0.0
