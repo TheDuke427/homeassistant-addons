@@ -17,4 +17,4 @@ RUN npm run build
 
 EXPOSE 8080
 
-CMD ["/bin/bash","/run.sh"]
+CMD ["/run.sh"]
