@@ -9,6 +9,8 @@
   "webui": "http://[HOST]:[PORT:80]",
   "ports": {
     "8080/tcp": 8080
-  "map": ["/media/JELLYFINMEDIA/Roms:ro:/roms"]
-  }
+  },
+  "map": [
+    "/media/JELLYFINMEDIA/Roms:ro:/roms"
+  ]
 }
