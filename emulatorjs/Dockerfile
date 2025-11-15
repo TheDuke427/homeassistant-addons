@@ -1,42 +1,28 @@
-# Base image
-FROM alpine:3.19
+# Use Node 18 LTS on Alpine
+FROM node:18-alpine
 
-# Install build dependencies
-RUN apk update && apk add --no-cache \
-    nodejs \
-    npm \
+# Install dependencies
+RUN apk add --no-cache \
+    bash \
     git \
     python3 \
     make \
     g++ \
-    bash \
-    p7zip \
-    curl \
-    wget \
-    ca-certificates
-
-# Clone EmulatorJS repository
-RUN git clone https://github.com/EmulatorJS/EmulatorJS.git /emulatorjs
+    p7zip
 
 # Set working directory
 WORKDIR /emulatorjs
 
-# Install Node dependencies
-RUN npm install
+# Clone EmulatorJS repo and build
+RUN git clone https://github.com/EmulatorJS/EmulatorJS.git . \
+    && npm install \
+    && npm run build
 
-# Patch build.js to avoid stdout.clearLine errors in Docker (non-TTY)
-RUN sed -i 's/process.stdout.clearLine();//g' build.js
-RUN sed -i 's/process.stdout.cursorTo(0);//g' build.js
+# Expose port for HA add-on
+EXPOSE 8080
 
-# Build EmulatorJS
-RUN npm run build
-
-# Copy add-on startup script
+# Copy startup script
 COPY run.sh /run.sh
 RUN chmod +x /run.sh
 
-# Expose default port
-EXPOSE 80
-
-# Start the server
 CMD ["/run.sh"]
