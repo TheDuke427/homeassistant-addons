@@ -3,9 +3,7 @@ set -e
 
 cd /emulatorjs
 
-# Make sure EmulatorJS is built
-npm install
-npm run build
+echo "Skipping rebuild — using prebuilt dist/"
 
 # Generate roms.json dynamically
 ROM_DIR="/roms"
