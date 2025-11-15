@@ -20,14 +20,16 @@ RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
 # Install npm packages
 RUN npm install
 
-# Patch build.js to avoid TTY error
-RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js
+# Patch build.js to avoid TTY errors
+RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdout.clearLine();/' build.js \
+ && sed -i 's/process.stdout.cursorTo(0);/if(process.stdout.isTTY) process.stdout.cursorTo(0);/' build.js
 
-# Build EmulatorJS
-RUN npm run build
+# Make run.sh executable
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
 
-# Expose default port if needed
+# Expose default port
 EXPOSE 8080
 
-# Start EmulatorJS server (adjust if needed)
-CMD ["node", "server.js"]
+# Start container with run.sh
+CMD ["/run.sh"]
