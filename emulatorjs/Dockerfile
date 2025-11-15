@@ -1,23 +1,27 @@
 FROM alpine:3.19
 
 # Install dependencies
-RUN apk update && \
-    apk add --no-cache \
-        nodejs \
-        npm \
-        git \
-        bash
+RUN apk update && apk add --no-cache \
+    nodejs \
+    npm \
+    git \
+    python3 \
+    make \
+    g++ \
+    bash
 
-# Install EmulatorJS from NPM (frontend + backend)
-RUN npm install -g emulatorjs
+# Clone EmulatorJS from GitHub
+RUN git clone https://github.com/EmulatorJS/EmulatorJS.git /emulatorjs
 
-# Create working directory
-WORKDIR /app
+# Install dependencies and build backend/frontend
+WORKDIR /emulatorjs
+RUN npm install
+RUN npm run build
 
-# Copy start script
-COPY run.sh /app/run.sh
-RUN chmod +x /app/run.sh
+# Copy startup script
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
 
 EXPOSE 80
 
-CMD ["/app/run.sh"]
+CMD ["/run.sh"]
