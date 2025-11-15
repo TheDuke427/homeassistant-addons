@@ -32,7 +32,7 @@ RUN chmod +x /emulatorjs/run.sh
 RUN npm run build
 
 # Fetch all emulator cores
-RUN npm run fetch-cores
+RUN npm run build && node scripts/fetch-cores.js
 
 # Expose default port
 EXPOSE 8080
