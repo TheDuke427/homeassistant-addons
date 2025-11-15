@@ -24,7 +24,7 @@ RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdou
 RUN npm run build
 
 # NOW copy your UI
-COPY index.html /emulatorjs/dist/index.html
+COPY index.html /emulatorjs/dist/www/index.html
 
 # Copy run script
 COPY run.sh /emulatorjs/run.sh
