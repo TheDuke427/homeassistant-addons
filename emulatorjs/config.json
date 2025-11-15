@@ -13,6 +13,7 @@
   "map": [
   "/media/JELLYFINMEDIA/EmulatorJS/roms:ro:/roms",
   "/media/JELLYFINMEDIA/EmulatorJS/saves:/emulatorjs/saves",
-  "/media/JELLYFINMEDIA/EmulatorJS/cores:/emulatorjs/cores"
+  "/media/JELLYFINMEDIA/EmulatorJS/cores:/emulatorjs/cores,
+  "/media/JELLYFINMEDIA/EmulatorJS/data:/emulatorjs/data"
 ]
 }
