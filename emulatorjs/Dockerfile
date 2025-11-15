@@ -26,6 +26,11 @@ RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdou
 # Build EmulatorJS (creates dist/)
 RUN npm run build
 
+COPY index.html dist/www/index.html
+COPY assets dist/www/assets/
+COPY emulator.css dist/www/
+COPY loader.js dist/www/
+
 # Copy run script
 COPY run.sh /emulatorjs/run.sh
 RUN chmod +x /emulatorjs/run.sh
