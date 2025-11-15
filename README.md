@@ -1,9 +1,5 @@
 # homeassistant-addons
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
-
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://git-lister.onrender.com/api/stars/jdeath/homeassistant-addons?limit=30)](https://github.com/jdeath/homeassistant-addons/stargazers)
-
 ## About
 
 Home Assistant allows anyone to create add-on repositories to share their
