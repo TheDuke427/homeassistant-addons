@@ -20,7 +20,7 @@ ls -la /emulatorjs/data || true
 
 # Generate roms.json dynamically (from mounted /roms)
 ROM_DIR="/roms"
-OUTPUT_FILE="/emulatorjs/data/roms.json"  # writable location in container
+OUTPUT_FILE="./dist/www/roms.json"  # writable location in container
 
 echo "Generating roms.json from $ROM_DIR ..."
 
