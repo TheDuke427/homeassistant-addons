@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /emulatorjs
 
 # Clone EmulatorJS repo
-RUN git clone https://github.com/EmulatorJS/EmulatorJS.git . 
+RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
 
-# Install npm packages
+# Install dependencies
 RUN npm install
 
 # Patch build.js to avoid TTY errors
@@ -25,11 +25,6 @@ RUN sed -i 's/process.stdout.clearLine();/if(process.stdout.isTTY) process.stdou
 
 # Build EmulatorJS (creates dist/)
 RUN npm run build
-
-COPY index.html dist/www/index.html
-COPY assets dist/www/assets/
-COPY emulator.css dist/www/
-COPY loader.js dist/www/
 
 # Copy run script
 COPY run.sh /emulatorjs/run.sh
