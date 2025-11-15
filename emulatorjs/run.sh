@@ -36,4 +36,4 @@ echo "roms.json generated at $OUTPUT_FILE (size: $(stat -c%s "$OUTPUT_FILE") byt
 
 # === Start HTTP server ===
 echo "Starting http-server serving ./dist/www on :8080"
-npx http-server ./dist/www -p 8080 -a 0.0.0.0
+npx http-server ./dist -p 8080 -a 0.0.0.0
