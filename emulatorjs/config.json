@@ -6,14 +6,11 @@
   "arch": ["amd64", "aarch64"],
   "startup": "services",
   "boot": "auto",
-  "webui": "http://[HOST]:[PORT:80]",
+  "webui": "http://[HOST]:[PORT:8080]",
   "ports": {
     "8080/tcp": 8080
   },
   "map": [
     "/media/JELLYFINMEDIA/Roms:ro:/roms"
-  ],
-  "roms_path": "/roms",
-  "save_path": "/emulatorjs/saves",
-  "cores_path": "/emulatorjs/cores"
+  ]
 }
