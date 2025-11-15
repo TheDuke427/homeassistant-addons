@@ -9,5 +9,8 @@ npm run build
 mkdir -p dist/www
 unzip -o dist/4.2.3.zip -d dist/www
 
+# Fetch cores
+node scripts/fetch-cores.js
+
 # Start http-server to serve the UI
 npx http-server dist/www -p 8080 -a 0.0.0.0
