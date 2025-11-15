@@ -17,8 +17,8 @@ WORKDIR /emulatorjs
 # Clone EmulatorJS repo
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
 
-# Copy generate_roms.js into container
-COPY generate_roms.js /emulatorjs/generate_roms.js
+# Copy generate_roms.cjs into container
+COPY generate_roms.cjs /emulatorjs/generate_roms.cjs
 
 # Install npm packages
 RUN npm install
