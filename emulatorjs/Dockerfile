@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
 
 # Set working directory
 WORKDIR /emulatorjs
+COPY index.html /emulatorjs/dist/index.html
 
 # Clone EmulatorJS repo
 RUN git clone https://github.com/EmulatorJS/EmulatorJS.git .
