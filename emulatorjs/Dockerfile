@@ -1,5 +1,5 @@
 ARG BUILD_VERSION
-FROM emulatorjs/emulatorjs:stable
+FROM ghcr.io/emulatorjs/js-docker:latest
 
 #VOLUME [ "/share" ]
 
